@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<title>TransmitMail サンプル</title>
-<link rel="stylesheet" href="http://etc.dounokouno.com/ttXHTMLTemplate/css/screen.css">
-</head>
-<body class="home">
-<div id="header">
-    <div class="container">
-        <h1>TransmitMail サンプル</h1>
-    </div>
-</div>
-<div id="content">
-    <div class="container">
-        <div class="section">
-            <p>TransmitMailの動作サンプルです。<br>
-                ※dounokouno[at]gmail.com宛にメール送信されるようになっていますので、ご注意ください。</p>
+
+         <div class="hSubWrap">
+            <h2 class="hSub">
+                お問い合わせ
+                <p class="jp">
+                    商品のご注文や発送等、通販に関するお問い合わせは、下記フォームよりご連絡ください。
+                </p>
+            </h2>
         </div>
-        <div class="section">
-            <h2>メールフォーム</h2>
+
+        <div class="fixedContents">
             {if:$global_errors}
-            <p><em>入力内容に誤りがあります。</em></p>
-            <div class="section">
+            <p class="err"><em>入力内容に誤りがあります。</em></p>
+            <div class="err-list">
                 <ul>
                     {loop:$global_errors}
                     <li><em>{$global_errors[]}</em></li>
@@ -30,392 +20,107 @@
             </div>
             {/if:$global_errors}
             <form method="post" action="index.php" enctype="multipart/form-data">
-                <div class="section">
-                    <h3>GET値の取得、表示</h3>
-                    <table width="100%" class="alpha">
-                        <tr>
-                            <th width="300">GETの表示</th>
-                            <td>
-                                {$_GET.example}{$GET値取得サンプル}
-                                <input type="hidden" name="GET値取得サンプル" value="{$_GET.example}{$GET値取得サンプル}">
-                            </td>
-                        </tr>
-                    </table>
+
+            <dl class="payment">
+                <dt>法人/個人　<span class="attention must">※必須</span></dt>
+                <dd>
+                  <label><input type="radio" name="法人/個人" value="法人" {$checked.法人/個人.法人}> 法人</label>
+                  <label><input type="radio" name="法人/個人" value="個人" {$checked.法人/個人.個人}> 個人</label>
+              </dd>
+                <input type="hidden" name="required[]" value="法人/個人">
+            </dl>
+            
+            <div class="input-row ofh">
+                <div class="l-size input js-input">
+                    <label for="name-last">お名前　<span class="attention must">※必須</span></label>
+                    <input id="name-last" type="text" name="お名前" class="name_last" size="10" value="{$お名前}" placeholder="例）山田 花子">
+                    <span class="input-line"></span>
+                    <p>お名前を入力してください</p>
+                    <input type="hidden" name="required[]" value="お名前">
                 </div>
-                <div class="section">
-                    <h3>フォームパーツサンプル</h3>
-                    <table width="100%" class="alpha">
-                        <tr>
-                            <th width="300">シングルラインインプット</th>
-                            <td>
-                                <input type="text" name="シングルラインインプット" value="{$シングルラインインプット}" class="middle">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>マルチラインインプット</th>
-                            <td>
-                                <textarea rows="6" cols="30" name="マルチラインインプット" class="wide">{$マルチラインインプット}</textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>ラジオボタン</th>
-                            <td>
-                                <label><input type="radio" name="ラジオボタン" value="項目1" {$checked.ラジオボタン.項目1} {$checked.default}>
-                                    項目1</label>
-                                &nbsp;
-                                <label><input type="radio" name="ラジオボタン" value="項目2" {$checked.ラジオボタン.項目2}>
-                                    項目2</label>
-                                &nbsp;
-                                <label><input type="radio" name="ラジオボタン" value="項目3" {$checked.ラジオボタン.項目3}>
-                                    項目3</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>チェックボックス</th>
-                            <td>
-                                <label><input type="checkbox" name="チェックボックス[]" value="項目1" {$checked.チェックボックス.項目1} {$checked.default}>
-                                    項目1</label><br>
-                                <label><input type="checkbox" name="チェックボックス[]" value="項目2" {$checked.チェックボックス.項目2}>
-                                    項目2</label><br>
-                                <label><input type="checkbox" name="チェックボックス[]" value="項目3" {$checked.チェックボックス.項目3}>
-                                    項目3</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>セレクトメニュー</th>
-                            <td>
-                                <select name="セレクトメニュー">
-                                    <option value="項目1" {$selected.セレクトメニュー.項目1}>項目1</option>
-                                    <option value="項目2" {$selected.セレクトメニュー.項目2}>項目2</option>
-                                    <option value="項目3" {$selected.セレクトメニュー.項目3}>項目3</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>マルチプルセレクトメニュー</th>
-                            <td>
-                                <select name="マルチプルセレクトメニュー[]" multiple="multiple">
-                                    <option value="項目1" {$selected.マルチプルセレクトメニュー.項目1}>項目1</option>
-                                    <option value="項目2" {$selected.マルチプルセレクトメニュー.項目2}>項目2</option>
-                                    <option value="項目3" {$selected.マルチプルセレクトメニュー.項目3}>項目3</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>ファイル1（500KB以下のGIF、JPG、PNG）</th>
-                            <td>
-                                {if:$ファイル1.tmp_name}
-                                <label><input type="checkbox" name="file_remove[]" value="ファイル1">
-                                    このファイルを削除する</label>
-                                <p><img src="index.php?file={$ファイル1.tmp_name}" alt="{$ファイル1.name}" width="300"><br>
-                                    <a href="index.php?file={$ファイル1.tmp_name}" target="_blank" class="external">画像を別ウィンドウで開く</a></p>
-                                <input type="hidden" name="file[ファイル1][tmp_name]" value="{$ファイル1.tmp_name}">
-                                <input type="hidden" name="file[ファイル1][name]" value="{$ファイル1.name}">
-                                {/if:$ファイル1.tmp_name}
-                                <input type="file" name="ファイル1">
-                                {loop:$file.ファイル1}
-                                <div class="error"><em>{$file.ファイル1[]}</em></div>
-                                {/loop:$file.ファイル1}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>ファイル2（500KB以下のGIF、JPG、PNG）</th>
-                            <td>
-                                {if:$ファイル2.tmp_name}
-                                <label><input type="checkbox" name="file_remove[]" value="ファイル2">
-                                    このファイルを削除する</label>
-                                <p><img src="index.php?file={$ファイル2.tmp_name}" alt="{$ファイル2.name}" width="300"><br>
-                                    <a href="index.php?file={$ファイル2.tmp_name}" target="_blank" class="external">画像を別ウィンドウで開く</a></p>
-                                <input type="hidden" name="file[ファイル2][tmp_name]" value="{$ファイル2.tmp_name}">
-                                <input type="hidden" name="file[ファイル2][name]" value="{$ファイル2.name}">
-                                {/if:$ファイル2.tmp_name}
-                                <input type="file" name="ファイル2">
-                                {loop:$file.ファイル2}
-                                <div class="error"><em>{$file.ファイル2[]}</em></div>
-                                {/loop:$file.ファイル2}
-                            </td>
-                        </tr>
-                    </table>
+
+                <div class="l-size input js-input">
+                    <label for="name-last">ふりがな　<span class="attention must">※必須</span></label>
+                    <input id="name-last" type="text" name="ふりがな" class="name_last" size="10" value="{$ふりがな}" placeholder="例）山田 花子">
+                    <span class="input-line"></span>
+                    <p>ひらがなで入力してください</p>
+                    <input type="hidden" name="required[]" value="ふりがな">
+                    <input type="hidden" name="hiragana[]" value="ふりがな">
+                    {if:$hiragana.ふりがな}
+                    {$hiragana.ふりがな}
+                    {/if:$hiragana.ふりがな}
                 </div>
-                <div class="section">
-                    <h3>入力オプション</h3>
-                    <table width="100%" class="alpha">
-                        <tr>
-                            <th width="300">入力必須</th>
-                            <td>
-                                <input type="text" name="入力必須" value="{$入力必須}" class="middle">
-                                <input type="hidden" name="required[]" value="入力必須">
-                                {if:$required.入力必須}
-                                <div class="error"><em>{$required.入力必須}</em></div>
-                                {/if:$required.入力必須}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>メールアドレス</th>
-                            <td>
-                                <input type="text" name="メールアドレス" value="{$メールアドレス}" class="middle">
-                                <input type="hidden" name="email[]" value="メールアドレス">
-                                {if:$email.メールアドレス}
-                                <div class="error"><em>{$email.メールアドレス}</em></div>
-                                {/if:$email.メールアドレス}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>半角文字</th>
-                            <td>
-                                <input type="text" name="半角文字" value="{$半角文字}" class="middle">
-                                <input type="hidden" name="hankaku[]" value="半角文字">
-                                {if:$hankaku.半角文字}
-                                <div class="error"><em>{$hankaku.半角文字}</em></div>
-                                {/if:$hankaku.半角文字}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>半角英数字</th>
-                            <td>
-                                <input type="text" name="半角英数字" value="{$半角英数字}" class="middle">
-                                <input type="hidden" name="hankaku_eisu[]" value="半角英数字">
-                                {if:$hankaku_eisu.半角英数字}
-                                <div class="error"><em>{$hankaku_eisu.半角英数字}</em></div>
-                                {/if:$hankaku_eisu.半角英数字}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>半角英字</th>
-                            <td>
-                                <input type="text" name="半角英字" value="{$半角英字}" class="middle">
-                                <input type="hidden" name="hankaku_eiji[]" value="半角英字">
-                                {if:$hankaku_eiji.半角英字}
-                                <div class="error"><em>{$hankaku_eiji.半角英字}</em></div>
-                                {/if:$hankaku_eiji.半角英字}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>数字</th>
-                            <td>
-                                <input type="text" name="数字" value="{$数字}" class="mini">
-                                <input type="hidden" name="num[]" value="数字">
-                                {if:$num.数字}
-                                <div class="error"><em>{$num.数字}</em></div>
-                                {/if:$num.数字}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>数字＋ハイフン</th>
-                            <td>
-                                <input type="text" name="数字＋ハイフン" value="{$数字＋ハイフン}" class="narrow">
-                                <input type="hidden" name="num_hyphen[]" value="数字＋ハイフン">
-                                {if:$num_hyphen.数字＋ハイフン}
-                                <div class="error"><em>{$num_hyphen.数字＋ハイフン}</em></div>
-                                {/if:$num_hyphen.数字＋ハイフン}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>ひらがな</th>
-                            <td>
-                                <input type="text" name="ひらがな" value="{$ひらがな}" class="middle">
-                                <input type="hidden" name="hiragana[]" value="ひらがな">
-                                {if:$hiragana.ひらがな}
-                                <div class="error"><em>{$hiragana.ひらがな}</em></div>
-                                {/if:$hiragana.ひらがな}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>全角カタカナ</th>
-                            <td>
-                                <input type="text" name="全角カタカナ" value="{$全角カタカナ}" class="middle">
-                                <input type="hidden" name="zenkaku_katakana[]" value="全角カタカナ">
-                                {if:$zenkaku_katakana.全角カタカナ}
-                                <div class="error"><em>{$zenkaku_katakana.全角カタカナ}</em></div>
-                                {/if:$zenkaku_katakana.全角カタカナ}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>全角文字を含むか</th>
-                            <td>
-                                <input type="text" name="全角文字を含むか" value="{$全角文字を含むか}" class="middle">
-                                <input type="hidden" name="zenkaku[]" value="全角文字を含むか">
-                                {if:$zenkaku.全角文字を含むか}
-                                <div class="error"><em>{$zenkaku.全角文字を含むか}</em></div>
-                                {/if:$zenkaku.全角文字を含むか}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>全て全角文字</th>
-                            <td>
-                                <input type="text" name="全て全角文字" value="{$全て全角文字}" class="middle">
-                                <input type="hidden" name="zenkaku_all[]" value="全て全角文字">
-                                {if:$zenkaku_all.全て全角文字}
-                                <div class="error"><em>{$zenkaku_all.全て全角文字}</em></div>
-                                {/if:$zenkaku_all.全て全角文字}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>3文字以上</th>
-                            <td>
-                                <input type="text" name="3文字以上" value="{$3文字以上}" class="middle">
-                                <input type="hidden" name="len[]" value="3文字以上 3-">
-                                {if:$len.3文字以上}
-                                <div class="error"><em>{$len.3文字以上}</em></div>
-                                {/if:$len.3文字以上}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>3文字以下</th>
-                            <td>
-                                <input type="text" name="3文字以下" value="{$3文字以下}" class="middle">
-                                <input type="hidden" name="len[]" value="3文字以下 -3">
-                                {if:$len.3文字以下}
-                                <div class="error"><em>{$len.3文字以下}</em></div>
-                                {/if:$len.3文字以下}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>3文字固定</th>
-                            <td>
-                                <input type="text" name="3文字固定" value="{$3文字固定}" class="middle">
-                                <input type="hidden" name="len[]" value="3文字固定 3-3">
-                                {if:$len.3文字固定}
-                                <div class="error"><em>{$len.3文字固定}</em></div>
-                                {/if:$len.3文字固定}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>6文字以上8文字以下</th>
-                            <td>
-                                <input type="text" name="6文字以上8文字以下" value="{$6文字以上8文字以下}" class="middle">
-                                <input type="hidden" name="len[]" value="6文字以上8文字以下 6-8">
-                                {if:$len.6文字以上8文字以下}
-                                <div class="error"><em>{$len.6文字以上8文字以下}</em></div>
-                                {/if:$len.6文字以上8文字以下}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>一致1</th>
-                            <td>
-                                <input type="text" name="一致1" value="{$一致1}" class="middle">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>一致2</th>
-                            <td>
-                                <input type="text" name="一致2" value="{$一致2}" class="middle">
-                                <input type="hidden" name="match[]" value="一致1 一致2">
-                                {if:$match.一致1}
-                                <div class="error"><em>{$match.一致1}</em></div>
-                                {/if:$match.一致1}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>URL</th>
-                            <td>
-                                <input type="text" name="URL" value="{$URL}" class="middle">
-                                <input type="hidden" name="url[]" value="URL">
-                                {if:$url.URL}
-                                <div class="error"><em>{$url.URL}</em></div>
-                                {/if:$url.URL}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>3以下の数字</th>
-                            <td>
-                                <input type="text" name="3以下の数字" value="{$3以下の数字}" class="middle">
-                                <input type="hidden" name="num_range[]" value="3以下の数字 -3">
-                                {if:$num_range.3以下の数字}
-                                <div class="error"><em>{$num_range.3以下の数字}</em></div>
-                                {/if:$num_range.3以下の数字}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>3以上の数字</th>
-                            <td>
-                                <input type="text" name="3以上の数字" value="{$3以上の数字}" class="middle">
-                                <input type="hidden" name="num_range[]" value="3以上の数字 3-">
-                                {if:$num_range.3以上の数字}
-                                <div class="error"><em>{$num_range.3以上の数字}</em></div>
-                                {/if:$num_range.3以上の数字}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>ちょうど3の数字</th>
-                            <td>
-                                <input type="text" name="ちょうど3の数字" value="{$ちょうど3の数字}" class="middle">
-                                <input type="hidden" name="num_range[]" value="ちょうど3の数字 3-3">
-                                {if:$num_range.ちょうど3の数字}
-                                <div class="error"><em>{$num_range.ちょうど3の数字}</em></div>
-                                {/if:$num_range.ちょうど3の数字}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>1〜12の数字</th>
-                            <td>
-                                <input type="text" name="1〜12の数字" value="{$1〜12の数字}" class="middle">
-                                <input type="hidden" name="num_range[]" value="1〜12の数字 1-12">
-                                {if:$num_range.1〜12の数字}
-                                <div class="error"><em>{$num_range.1〜12の数字}</em></div>
-                                {/if:$num_range.1〜12の数字}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>ファイルの入力必須<br>
-                                （500KB以下のGIF、JPG、PNG）</th>
-                            <td>
-                                {if:$ファイルの入力必須.tmp_name}
-                                <label><input type="checkbox" name="file_remove[]" value="ファイルの入力必須">
-                                    このファイルを削除する</label>
-                                <p><img src="index.php?file={$ファイルの入力必須.tmp_name}" alt="{$ファイルの入力必須.name}" width="300"><br>
-                                    <a href="index.php?file={$ファイルの入力必須.tmp_name}" target="_blank" class="external">画像を別ウィンドウで開く</a></p>
-                                <input type="hidden" name="file[ファイルの入力必須][tmp_name]" value="{$ファイルの入力必須.tmp_name}">
-                                <input type="hidden" name="file[ファイルの入力必須][name]" value="{$ファイルの入力必須.name}">
-                                {/if:$ファイルの入力必須.tmp_name}
-                                <input type="file" name="ファイルの入力必須">
-                                <input type="hidden" name="file_required[]" value="ファイルの入力必須">
-                                {loop:$file.ファイルの入力必須}
-                                <div class="error"><em>{$file.ファイルの入力必須[]}</em></div>
-                                {/loop:$file.ファイルの入力必須}
-                                {if:$file_required.ファイルの入力必須}
-                                <div class="error"><em>{$file_required.ファイルの入力必須}</em></div>
-                                {/if:$file_required.ファイルの入力必須}
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="section">
-                    <h3>入力オプションを複数組み合わせるサンプル</h3>
-                    <p>郵便番号として、「数字とハイフンを含む8文字」をチェックする。</p>
-                    <table width="100%" class="alpha">
-                        <tr>
-                            <th width="300">郵便番号</th>
-                            <td>
-                                <input type="text" name="郵便番号" value="{$郵便番号}" class="narrow">
-                                <input type="hidden" name="num_hyphen[]" value="郵便番号">
-                                <input type="hidden" name="len[]" value="郵便番号 8">
-                                {if:$num_hyphen.郵便番号}
-                                <div class="error"><em>{$num_hyphen.郵便番号}</em></div>
-                                {/if:$num_hyphen.郵便番号}
-                                {if:$len.郵便番号}
-                                <div class="error"><em>{$len.郵便番号}</em></div>
-                                {/if:$len.郵便番号}
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="section">
-                    <h3>x、yを含む項目名</h3>
-                    <p>主に PHPUnit + Selenium のテスト用の項目。</p>
-                    <table width="100%" class="alpha">
-                        <tr>
-                            <th width="300">abcdefghijklnmopqrstuvwxyz</th>
-                            <td>
-                                <input type="text" name="abcdefghijklnmopqrstuvwxyz" value="{$abcdefghijklnmopqrstuvwxyz}" class="middle">
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="center"><input type="submit" value="入力内容を確認する"></div>
+            </div>
+
+            <div class="l-size input js-input">
+                <label for="name-last">電話番号　<span class="attention must">※必須</span></label>
+                <input id="name-last" type="text" name="電話番号" class="name_last" size="10" value="{$電話番号}" placeholder="例）06-1234-5678">
+                <span class="input-line"></span>
+                <p>市外局番から、ハイフンつきでご入力ください（半角）</p>
+                <input type="hidden" name="num_hyphen[]" value="電話番号">
+                {if:$num_hyphen.電話番号}
+                {$num_hyphen.電話番号}
+                {/if:$num_hyphen.電話番号}
+            </div>
+
+            <div class="l-size input js-input">
+                <label for="mailaddress1">メールアドレス　<span class="attention must">※必須</span></label>
+                <input id="mailaddress1" type="text" name="メールアドレス" size="40" value="{$メールアドレス}">
+                <span class="input-line"></span>
+                <p>商品をご購入の際など、ご入力いただいたアドレスにメールが届きます。入力間違いがないようご入力ください。（半角）</p>
+                <input type="hidden" name="required[]" value="メールアドレス">
+                <input type="hidden" name="email[]" value="メールアドレス">
+                {if:$email.メールアドレス}
+                {$email.メールアドレス}
+                {/if:$email.メールアドレス} 
+            </div>
+
+            <div class="l-size input js-input">
+                <label for="mailaddress1">メールアドレス(確認)　<span class="attention must">※必須</span></label>
+                <input id="mailaddress1" type="text" name="メールアドレス(確認)" size="40" value="{$メールアドレス(確認)}">
+                <span class="input-line"></span>
+                <p>確認のため、もう一度ご入力ください。</p>
+                <input type="hidden" name="required[]" value="メールアドレス(確認)">
+                <input type="hidden" name="match[]" value="メールアドレス メールアドレス(確認)">
+                <input type="hidden" name="email[]" value="メールアドレス(確認)">
+                {if:$email.メールアドレス(確認)}
+                {$email.メールアドレス(確認)}
+                {/if:$email.メールアドレス(確認)} 
+            </div>
+
+            <div class="contactAttention">
+            <p>迷惑メール防止の受信設定をされている方は、お手数ですが、<br>
+            <span class="txtRed">「テスト株式会社」のドメインの受信設定（@hot-factory.jp）</span>をお願いいたします。</p>
+            <p>yahooやGoogleなどでは <span class="txtRed">「迷惑メール」に分類される</span>ケースもございますので、<br>
+            お問い合せいただく前に、一度ご確認くださいませ。</p>
+            <p>設定・確認してもなお、メールが届かない場合は、お手数ではございますが<br>
+            <span class="txtRed">0120-000-000（10:00～17:00 土日祝は休み）</span>までお問い合せください。</p>
+            </div>
+
+            <div class="l-size input js-select js-select-decoration">
+                <label for="name">お問い合わせ項目　<span class="attention must">※必須</span></label>
+                <select name="お問い合わせ項目">
+                    <option value="" {$selected.default}>ご選択ください</option>
+                    <option value="当サイトについて" {$selected.お問い合わせ項目.当サイトについて}>当サイトについて</option>
+                    <option value="販売商品について" {$selected.お問い合わせ項目.販売商品について}>販売商品について</option>
+                    <option value="お買物手続き・配送について" {$selected.お問い合わせ項目.お買物手続き・配送について}>お買物手続き・配送について</option>
+                    <option value="ユーザー登録について" {$selected.お問い合わせ項目.ユーザー登録について}>ユーザー登録について</option>
+                    <option value="その他" {$selected.お問い合わせ項目.その他}>その他</option>
+                </select>
+                <input type="hidden" name="required[]" value="お問い合わせ項目">
+            </div>
+
+            <div class="l-size input js-input">
+                <label for="name">お問い合わせ内容　<span class="attention must">※必須</span></label>
+                <textarea name="お問い合わせ内容" id="" cols="30" rows="10" class="contact-area">{$お問い合わせ内容}</textarea>
+                <input type="hidden" name="required[]" value="お問い合わせ内容">
+            </div>
+
+            <div class="btnWrap">
+                <input type="submit" class="btn btnForm" value="同意する">
+            </div>
+
             </form>
+
         </div>
-    </div>
-</div>
-</body>
-</html>
+        <!-- /.guide -->

@@ -1,0 +1,7 @@
+config:
+    to_email: yoshihiro_fujita@hot-factory.jp
+    to_subject: ［テスト株式会社］お問い合わせ
+    auto_reply_subject: ［テスト株式会社］お問い合わせありがとうございます
+    auto_reply_name: テスト株式会社
+    auto_reply_name: テスト株式会社
+    return_path: yoshihiro_fujita@hot-factory.jp,

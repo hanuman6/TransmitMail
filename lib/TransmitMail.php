@@ -1062,6 +1062,9 @@ class TransmitMail
         $this->mail->errorlogPath($this->config['log_dir']);
         $this->mail->errorlogLevel(3);
         $this->mail->errorlogFilename('qdmail_error.log');
+        if(isset($this->config['return_path']) && !empty($this->config['return_path'])){
+	        $this->mail->mtaOption('-f '.$this->config['return_path']);//2016-03-11 京極追加
+		}
         $this->mail->smtpObject()->error_display = false;
 
         // Qdsmpt の設定

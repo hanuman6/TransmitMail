@@ -6,7 +6,7 @@
 1週間以上経ってもお返事がない場合は、
 お手数ですが下記アドレスよりお問い合わせくださいませ。
 
-info@example.com
+webshop@kayabeautylabo.jp
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -24,8 +24,6 @@ info@example.com
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-株式会社テスト
-http://www.example.com/
-Email: info@example.com
-TEL: 000-0000-0000
-FAX: 000-0000-0000
+テスト株式会社
+http://www.hot-factory.jp/
+Email: yoshihiro_fujita@hot-factory.jp
